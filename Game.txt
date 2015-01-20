@@ -1,0 +1,51 @@
+Elements:
+	battlefield
+	units
+	actionbar
+	time
+
+
+States:
+1)	place_units		30s
+2)	waitOtherPlayer_place (poling)
+3)	do_moves	20s
+4)	waitOtherPlayer_move (poling)
+5)  calculate	
+4)	waitOtherPlayer_calculation (poling)
+	...
+	3
+	4
+	5
+	6
+	...
+6)	end
+
+Units:
+	warrior sword shield
+	archer bow
+	
+Weapons moves:
+	sword   	removes right hand weapon or left hand weapon
+	axe			strong attack destroys shield or armor or double damage -3 power
+	mace		kick attack -3 power
+	shield  	another block not need to refresh as skill -2 power
+	long sword
+	long axe    	
+	spear		
+	
+Characteristics:
+	count
+	hp
+	damage
+	speed
+	power
+
+
+Standart moves:
+		refresh -4 power
+		move (autoattack random), moveToTarget (autoattack target if can)
+		normal attack + 3 power even if no attack
+		defence - 3 power
+		
+	
+attack, strong, def, curse, heal

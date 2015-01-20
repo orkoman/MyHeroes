@@ -1,0 +1,6 @@
+D:\Projects\MyHeroes\TestGameLogic\TestGameLogic\obj\x86\Debug\TestGameLogic.Properties.Resources.resources
+D:\Projects\MyHeroes\TestGameLogic\TestGameLogic\obj\x86\Debug\TestGameLogic.csproj.GenerateResource.Cache
+D:\Projects\MyHeroes\TestGameLogic\TestGameLogic\bin\Debug\TestGameLogic.exe
+D:\Projects\MyHeroes\TestGameLogic\TestGameLogic\bin\Debug\TestGameLogic.pdb
+D:\Projects\MyHeroes\TestGameLogic\TestGameLogic\obj\x86\Debug\TestGameLogic.exe
+D:\Projects\MyHeroes\TestGameLogic\TestGameLogic\obj\x86\Debug\TestGameLogic.pdb
