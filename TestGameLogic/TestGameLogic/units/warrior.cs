@@ -3,26 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TestGameLogic.weapons;
+using TestGameLogic.main;
+using TestGameLogic.units.parts;
 
 namespace TestGameLogic.units
 {
-    public class warrior : baseUnit
+    public class Warrior : baseUnit
     {
-        protected baseInHand rightHandWeapon = null;
-        protected baseInHand leftHandWeapon = null;
-
-        public warrior(baseInHand rightHandWeapon, baseInHand leftHandWeapon)
+        public Warrior(List<basePart> parts, int count, int baseHp, int baseSpeed, int basePower, Damage baseDamage)
+            : base(parts, count, baseHp, baseSpeed, basePower, baseDamage)
         {
-            this.rightHandWeapon = rightHandWeapon;
-            this.leftHandWeapon = leftHandWeapon;
-
-
-
         }
 
         public override object Clone()
         {
-            return new warrior(rightHandWeapon.Clone() as baseInHand, leftHandWeapon.Clone() as baseInHand);
+            //TODO parts.Clone()
+            return new Warrior(parts, count, baseHp, baseSpeed, basePower, baseDamage);
         }
+
+        /*public override void setWeapon(baseInHand thing)
+        { 
+            
+        }
+
+        public override void setWeapon(baseInHand thing, EHandType place)
+        { 
+        }*/
     }
 }

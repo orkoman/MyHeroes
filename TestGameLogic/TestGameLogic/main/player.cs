@@ -6,13 +6,13 @@ using TestGameLogic.units;
 
 namespace TestGameLogic
 {
-    public class player
+    public class Player
     {
-        private baseUnit[] units = null;
+        private List<baseUnit> units = null;
 
-        public player(baseUnit unit1, baseUnit unit2)
+        public Player(List<baseUnit> units)
         {
-            units = new baseUnit[] { unit1, unit2 };
+            this.units = units;
         }
     }
 }

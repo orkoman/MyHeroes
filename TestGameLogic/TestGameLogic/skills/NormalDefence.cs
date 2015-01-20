@@ -6,9 +6,9 @@ using TestGameLogic.units;
 
 namespace TestGameLogic.skills
 {
-    public class SwordSkill : baseSkill
+    public class NormalDefence : baseSkill
     {
-        public SwordSkill()
+        public NormalDefence()
         { 
         }
 
@@ -20,7 +20,7 @@ namespace TestGameLogic.skills
 
         public override object Clone()
         {
-            return new SwordSkill();
+            return new NormalDefence();
         }
     }
 }

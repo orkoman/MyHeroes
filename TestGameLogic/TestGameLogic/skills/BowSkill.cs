@@ -6,22 +6,21 @@ using TestGameLogic.units;
 
 namespace TestGameLogic.skills
 {
-    public class attack : baseSkill
+    public class BowSkill : baseSkill
     {
-        public attack()
+        public BowSkill()
         { 
         }
 
-        public override bool use()
+        protected override void setInitialParams()
         {
-            owner.Power += 4; //TODO put in xml
-            //TODO damage
-            return true;
+            //TODO Oleg read from xml or database
+            costs = -6;
         }
 
         public override object Clone()
         {
-            return new attack();
+            return new BowSkill();
         }
     }
 }

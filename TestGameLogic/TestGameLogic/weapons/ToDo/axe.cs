@@ -6,7 +6,7 @@ using TestGameLogic.skills;
 
 namespace TestGameLogic.weapons
 {
-    public class axe : baseWeapon
+/*    public class axe : baseWeapon
     {
         public axe()
             :base(new swordSkill())
@@ -17,5 +17,5 @@ namespace TestGameLogic.weapons
         {
             return new axe();
         }
-    }
+    }*/
 }

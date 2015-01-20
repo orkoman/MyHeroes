@@ -3,19 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TestGameLogic.skills;
+using TestGameLogic.main;
+using TestGameLogic.main.Requirements;
 
 namespace TestGameLogic.weapons
 {
-    public class shield : baseInHand
+    public class Shield : baseThing
     {
-        public shield()
-            : base(new swordSkill())
+        public Shield(List<baseSkill> skills, baseUnitRequirement requirements)
+            : base(skills, requirements)
         {
+
         }
 
         public override object Clone()
         {
-            return new shield();
+            return new Shield(skills, requirements);
         }
     }
 }

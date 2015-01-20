@@ -6,24 +6,21 @@ using TestGameLogic.units;
 
 namespace TestGameLogic.skills
 {
-    public class defence : baseSkill
+    public class ShieldSkill : baseSkill
     {
-        public defence()
+        public ShieldSkill()
         { 
         }
 
-        public override bool use()
+        protected override void setInitialParams()
         {
-            if (owner.Power >= 4)
-            {
-                owner.Power += 4;
-            }
-            return false;
+            //TODO Oleg read from xml or database
+            costs = -2;
         }
 
         public override object Clone()
         {
-            return new defence();
+            return new ShieldSkill();
         }
     }
 }

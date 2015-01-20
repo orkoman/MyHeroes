@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TestGameLogic
 {
-    public class battlefield
+    public class Battlefield
     {
     }
 }

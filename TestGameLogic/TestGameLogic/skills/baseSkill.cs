@@ -8,19 +8,21 @@ namespace TestGameLogic.skills
 {
     public abstract class baseSkill: ICloneable
     {
-        protected baseUnit owner = null;
+        /*protected baseUnit owner = null;
+        public void setOwner(baseUnit owner)
+        {
+            this.owner = owner;
+        }*/
+
+        protected int costs = -1;
+
 
         public baseSkill()
         { 
         }
 
-        public void setOwner(baseUnit owner)
-        {
-            this.owner = owner;
-        }
-
+        protected abstract void setInitialParams();
+        
         public abstract object Clone();
-
-        public abstract bool use();
     }
 }

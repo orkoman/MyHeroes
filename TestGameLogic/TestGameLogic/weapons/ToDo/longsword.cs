@@ -6,7 +6,7 @@ using TestGameLogic.skills;
 
 namespace TestGameLogic.weapons
 {
-    public class longsword : baseWeapon
+/*    public class longsword : baseWeapon
     {
         public longsword()
             : base(new swordSkill())
@@ -17,5 +17,5 @@ namespace TestGameLogic.weapons
         {
             return new longsword();
         }
-    }
+    }*/
 }

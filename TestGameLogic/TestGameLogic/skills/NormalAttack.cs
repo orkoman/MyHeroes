@@ -6,21 +6,21 @@ using TestGameLogic.units;
 
 namespace TestGameLogic.skills
 {
-    public class SwordSkill : baseSkill
+    public class NormalAttack : baseSkill
     {
-        public SwordSkill()
+        public NormalAttack()
         { 
         }
 
         protected override void setInitialParams()
-        {
+        { 
             //TODO Oleg read from xml or database
-            costs = -4;
+            costs = +4;
         }
 
         public override object Clone()
         {
-            return new SwordSkill();
+            return new NormalAttack();
         }
     }
 }
