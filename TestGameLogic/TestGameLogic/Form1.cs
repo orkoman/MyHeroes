@@ -20,7 +20,11 @@ namespace TestGameLogic
             this.AutoSize = true;
 
 
-            Game.start(pictureBox1);
+            Game.start(pictureBox1, pictureBox2);
+
+
+            pictureBox2.Left = pictureBox1.Left;
+            pictureBox2.Top = pictureBox1.Top + pictureBox1.Height + 10;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -223,12 +227,17 @@ namespace TestGameLogic
 
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
-            Game.click(e.X, e.Y);
+            Game.battleFieldClick(e.X, e.Y);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             Game.endTurn();
+        }
+
+        private void pictureBox2_MouseClick(object sender, MouseEventArgs e)
+        {
+            Game.actionBarClick(e.X, e.Y);
         }
 
         /*void testBaseRequirementClean(List<baseRequirement<TestObject>> list)

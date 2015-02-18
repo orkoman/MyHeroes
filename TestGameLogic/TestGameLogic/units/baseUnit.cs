@@ -13,7 +13,9 @@ namespace TestGameLogic.units
 {
     public abstract class baseUnit
     {
-        protected List<baseSkill> baseSkills = null;
+        protected baseSkill selectedSkill = null;
+
+        protected List<baseSkill> skills = null;
         protected List<baseSlot> slots = null;
 
         protected int position = -1; //not set
@@ -25,10 +27,15 @@ namespace TestGameLogic.units
         protected int basePower = -1;
         protected Damage baseDamage = null;
 
+        public baseSkill SelectedSkill
+        {
+            get { return selectedSkill; }
+        }
+
         public baseUnit(List<baseSlot> parts, int count, int baseHp, int baseSpeed, int basePower, Damage baseDamage)
         {
             this.slots = parts;
-            this.baseSkills = new List<baseSkill> { new NormalAttack(), new NormalDefence() };
+            this.skills = new List<baseSkill> { new NormalAttack(), new NormalDefence() };
             this.count = count;
             this.baseHp = baseHp;
             this.baseSpeed = baseSpeed;
@@ -120,5 +127,41 @@ namespace TestGameLogic.units
             }
         }
 
+        public List<baseSkill> getActiveSkills()
+        {
+            List<baseSkill> tempSkills = getActiveSkillsHelper(skills);
+
+            //also from weapons
+            foreach (baseSlot slot in slots)
+            {
+                tempSkills.AddRange(getActiveSkillsHelper(slot.getSkills()));
+            }
+
+            return tempSkills;
+        }
+
+        private List<baseSkill> getActiveSkillsHelper(List<baseSkill> helperSkills)
+        {
+            List<baseSkill> tempSkills = new List<baseSkill>();
+
+            foreach (baseSkill skill in helperSkills)
+            {
+                if (skill.isActive())
+                {
+                    tempSkills.Add(skill);
+                }
+            }
+            return tempSkills;
+        }
+
+        public void selectSkill(baseSkill skill)
+        {
+            selectedSkill = skill;
+        }
+
+        public void unselectUnit()
+        {
+            selectedSkill = null;
+        }
     }
 }

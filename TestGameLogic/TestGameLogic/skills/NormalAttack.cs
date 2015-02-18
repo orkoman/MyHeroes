@@ -6,18 +6,13 @@ using TestGameLogic.units;
 
 namespace TestGameLogic.skills
 {
-    public class NormalAttack : baseSkill
+    public class NormalAttack : baseActiveSkill
     {
         public NormalAttack()
-        { 
-        }
-
-        protected override void setInitialParams()
-        { 
+        {
             //TODO Oleg read from xml or database
             costs = +4;
         }
-
-        
+                
     }
 }

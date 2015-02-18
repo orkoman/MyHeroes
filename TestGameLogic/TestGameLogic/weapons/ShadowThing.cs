@@ -24,5 +24,10 @@ namespace TestGameLogic.weapons
         {
             return thing;
         }
+
+        public List<baseSkill> getSkills()
+        {
+            return new List<baseSkill>();
+        }
     }
 }

@@ -6,6 +6,7 @@ using TestGameLogic.units;
 using TestGameLogic.weapons;
 using TestGameLogic.units.parts;
 using System.Windows.Forms;
+using TestGameLogic.main.Grafic;
 
 namespace TestGameLogic.main
 {
@@ -29,8 +30,7 @@ namespace TestGameLogic.main
 
         private static List<Player> players = null;
         private static Player currentPlayer = null;
-
-        private static Battlefield battleField = null;
+        private static GraficMain graficMain = null;
 
         private static GameStates gameState = GameStates.setUnit;
 
@@ -53,19 +53,16 @@ namespace TestGameLogic.main
             }
         }
 
-        public static void start(PictureBox pictureBox)
+        public static void start(PictureBox battleFieldGrafic, PictureBox actionGrafic)
         {
-            createAll(pictureBox);
+            graficMain = new GraficMain(battleFieldGrafic, actionGrafic);
+            createEverything();
             stateMachineLoop();
         }
 
-        private static void createAll(PictureBox pictureBox)
+        private static void createEverything()
         {
             //Create Everything
-
-            //Create battlefield
-            battleField = new Battlefield(pictureBox, 15, 10);
-
 
             //Create units for player1
             Warrior warrior1 = GameDataFactory.createWarrior();
@@ -91,28 +88,36 @@ namespace TestGameLogic.main
 
             //set init positions for units  
             //TODO 
-
-
         }
 
         private static void setUnits()
         {
-            battleField.setPlayers(players);
-            battleField.reDraw();
+            graficMain.BattleField.setPlayers(players);
+            graficMain.reDraw();
 
             gameState = GameStates.doMoves_selectUnit;
             stateMachineLoop();
         }
 
-        public static void click(int x, int y)
+        public static void battleFieldClick(int x, int y)
         {
             switch (gameState)
             {
                 case GameStates.doMoves_selectUnit:
-                    doMoves_selectUnit(battleField.calculatePosition(x,y));
+                    doMoves_selectUnit(graficMain.BattleField.calculatePosition(x, y));
                     break;
                 case GameStates.doMoves_targetField:
-                    doMoves_targetField(battleField.calculatePosition(x, y));
+                    doMoves_targetField(graficMain.BattleField.calculatePosition(x, y));
+                    break;
+            }
+        }
+
+        public static void actionBarClick(int x, int y)
+        {
+            switch (gameState)
+            {
+                case GameStates.doMoves_targetField:
+                    doMoves_targetField_action(graficMain.Actionbar.calculatePosition(x, y));
                     break;
             }
         }
@@ -133,8 +138,9 @@ namespace TestGameLogic.main
         private static void selectUnit(Player player, baseUnit unit)
         {
             player.selectUnit(unit);
+            graficMain.Actionbar.selectUnit(unit);
 
-            battleField.reDraw();
+            graficMain.reDraw();
         }
 
         private static void selectPlayer(Player player)
@@ -149,9 +155,24 @@ namespace TestGameLogic.main
             currentPlayer.SelectedUnit.Target = position;
             currentPlayer.unselectUnit();
 
-            battleField.reDraw();
+            graficMain.reDraw();
 
             gameState = GameStates.doMoves_selectUnit;
+        }
+
+        private static void doMoves_targetField_action(int position)
+        {
+            //TODO OLEG
+            //currentPlayer.SelectedUnit.selectSkill();
+            
+            
+            //TODO OLEG
+            /*currentPlayer.SelectedUnit.Target = position;
+            currentPlayer.unselectUnit();
+
+            graficMain.reDraw();
+
+            gameState = GameStates.doMoves_selectUnit;*/
         }
 
         public static void endTurn()

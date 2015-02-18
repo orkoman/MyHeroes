@@ -6,13 +6,9 @@ using TestGameLogic.units;
 
 namespace TestGameLogic.skills
 {
-    public class BowSkill : baseSkill
+    public class BowSkill : baseActiveSkill
     {
         public BowSkill()
-        { 
-        }
-
-        protected override void setInitialParams()
         {
             //TODO Oleg read from xml or database
             costs = -6;

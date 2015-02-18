@@ -6,18 +6,13 @@ using TestGameLogic.units;
 
 namespace TestGameLogic.skills
 {
-    public class ShieldSkill : baseSkill
+    public class ShieldSkill : baseActiveSkill
     {
         public ShieldSkill()
         { 
-        }
-
-        protected override void setInitialParams()
-        {
             //TODO Oleg read from xml or database
             costs = -2;
         }
-
-       
+              
     }
 }

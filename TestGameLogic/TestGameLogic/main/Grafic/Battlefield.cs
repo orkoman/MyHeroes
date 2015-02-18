@@ -6,49 +6,29 @@ using System.Windows.Forms;
 using System.Drawing;
 using TestGameLogic.units;
 
-namespace TestGameLogic
+namespace TestGameLogic.main.Grafic
 {
-    public class Battlefield
+    public class Battlefield : baseGrafic
     {
-        Bitmap bmp = null;
-        Graphics gr = null;
-
         private const int FIELD_SIZE = 50; //pixel
 
         private int widthInFields = -1;
-        private int height = -1;
-
-        private int widthFull = -1;
-        private int heightFull = -1;
-
-        private PictureBox pictureBox = null;
+        private int heightInFields = -1;
 
         private List<Player> players = null;
 
-        private Pen penStandart = new Pen(Brushes.Black);
-        private Pen penSelected = new Pen(Brushes.Green);
-        private Pen penTarget = new Pen(Brushes.Red);
-
-        /*public int WidthInFields
+        public Battlefield(PictureBox pictureBox,int widthInFields, int heightInFields)
+            : base(pictureBox)
         {
-            get { return widthInFields; }
-        }*/
+            int widthFull = widthInFields*FIELD_SIZE;
+            int heightFull = heightInFields*FIELD_SIZE;
+            
+            setPicturebox(widthFull,heightFull);
 
-        public Battlefield(PictureBox pictureBox,int width, int height)
-        {
-            this.widthFull = width*FIELD_SIZE;
-            this.heightFull = height*FIELD_SIZE;
-            this.pictureBox = pictureBox;
-            this.pictureBox.Width = this.widthFull;
-            this.pictureBox.Height = this.heightFull;
+            this.widthInFields = widthInFields;
+            this.heightInFields = heightInFields;
 
-
-            this.bmp = new Bitmap(this.widthFull, this.heightFull);
-            this.gr = Graphics.FromImage(this.bmp);
-            this.widthInFields = width;
-            this.height = height;
-
-            clear();
+            //clear();
         }
 
         public void setPlayers(List<Player> players)
@@ -56,24 +36,18 @@ namespace TestGameLogic
             this.players = players;
             //set initial positions
             int leftUnitCount = players[0].Units.Count;
-            int divHeight = height / (leftUnitCount + 1);
+            int divHeight = heightInFields / (leftUnitCount + 1);
             for (int n = 0; n < leftUnitCount; n++)
             {
                 players[0].Units[n].Position = widthInFields * (divHeight* (n+1)) + 0;
             }
 
             int rightUnitCount = players[1].Units.Count;
-            divHeight = height / (rightUnitCount + 1);
+            divHeight = heightInFields / (rightUnitCount + 1);
             for (int n = 0; n < rightUnitCount; n++)
             {
                 players[1].Units[n].Position = widthInFields * (divHeight * (n + 1)) + widthInFields - 1;
             }
-        }
-
-        public void clear()
-        {
-            this.gr.FillRectangle(Brushes.White, new Rectangle(0, 0, this.widthFull, this.heightFull));
-            this.pictureBox.Image = bmp;
         }
 
         public void reDraw()
@@ -89,7 +63,7 @@ namespace TestGameLogic
 
                     // draw unit
                     gr.DrawRectangle(penStandart, new Rectangle(x * FIELD_SIZE + 2, y * FIELD_SIZE + 2, FIELD_SIZE - 4, FIELD_SIZE - 4));
-                    gr.DrawString(unit.GetType().Name.ToString(), Button.DefaultFont, Brushes.Black, x * FIELD_SIZE + FIELD_SIZE / 4, y * FIELD_SIZE + FIELD_SIZE / 4);
+                    gr.DrawString(unit.GetType().Name.ToString(), Button.DefaultFont, Brushes.Black, x * FIELD_SIZE + FIELD_SIZE / 10, y * FIELD_SIZE + FIELD_SIZE / 4);
                 
                     // draw Target
                     if (unit.Target != -1)
@@ -122,10 +96,5 @@ namespace TestGameLogic
             int position = y * widthInFields + x;
             return position;
         }
-
-        /*public void onClick()
-        { 
-            //TODO OLEG set units
-        }*/
     }
 }

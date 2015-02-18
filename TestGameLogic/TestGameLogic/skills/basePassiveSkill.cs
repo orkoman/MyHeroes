@@ -6,12 +6,15 @@ using TestGameLogic.units;
 
 namespace TestGameLogic.skills
 {
-    public abstract class baseSkill
+    public abstract class basePassiveSkill : baseSkill
     {
-        public baseSkill()
+        public basePassiveSkill()
         { 
         }
 
-        public abstract bool isActive();
+        public override bool isActive()
+        {
+            return false;
+        }
     }
 }

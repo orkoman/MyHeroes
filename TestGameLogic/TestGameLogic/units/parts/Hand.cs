@@ -10,7 +10,7 @@ namespace TestGameLogic.units.parts
     public abstract class Hand : baseSlot
     {
         public Hand(IInSlot thingInSlot)
-            : base(thingInSlot)
+            //: base(thingInSlot)
         { 
         
         }

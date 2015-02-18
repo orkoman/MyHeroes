@@ -51,7 +51,7 @@ namespace TestGameLogic.main
         public static Shield createShield()
         {
             //TODO read from xml
-            List<baseSkill> skills = new List<baseSkill> { new BowSkill() };
+            List<baseSkill> skills = new List<baseSkill> { new ShieldSkill() };
             baseUnitRequirement reqs = new SlotsRequirement(typeof(OffHand),1);
 
             return new Shield(skills, reqs);
