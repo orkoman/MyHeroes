@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using TestGameLogic.main.Tests;
 using TestGameLogic.main.Requirements;
+using TestGameLogic.main;
 
 namespace TestGameLogic
 {
@@ -16,6 +17,10 @@ namespace TestGameLogic
         public Form1()
         {
             InitializeComponent();
+            this.AutoSize = true;
+
+
+            Game.start(pictureBox1);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -209,6 +214,21 @@ namespace TestGameLogic
             result &= (req.checkAll(testObject) == false);
 
             return result;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //Game.start(pictureBox1);
+        }
+
+        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            Game.click(e.X, e.Y);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Game.endTurn();
         }
 
         /*void testBaseRequirementClean(List<baseRequirement<TestObject>> list)

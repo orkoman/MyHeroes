@@ -18,9 +18,6 @@ namespace TestGameLogic.skills
             costs = -2;
         }
 
-        public override object Clone()
-        {
-            return new ShieldSkill();
-        }
+       
     }
 }

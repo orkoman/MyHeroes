@@ -67,57 +67,23 @@ namespace TestGameLogic.main.Requirements
             return this;
         }
 
-    }
-}
-
-/*
- namespace TestGameLogic.main.Requirements
-{
-    public abstract class baseRequirement<T>
-    {
-        protected List<baseRequirement<T>> reqORList = new List<baseRequirement<T>>();
-        protected List<baseRequirement<T>> reqANDList = new List<baseRequirement<T>>();
-
-        protected abstract bool check(T obj);
-
-        public bool checkAll(T obj)
+        public baseRequirement<T> findFirstRequirement(Type reqType)
         {
-            bool result = check(obj);
-
-            if (reqANDList.Count > 0)
+            if (reqType.IsAssignableFrom(this.GetType()))
             {
-                foreach (baseRequirement<T> reqAND in reqANDList)
+                return this;
+            }
+            foreach (ReqOperation<T> reqAndOR in reqAndORList)
+            {
+                if (reqType.IsAssignableFrom(reqAndOR.Req.GetType()))
                 {
-                    result &= reqAND.checkAll(obj);
+                    return reqAndOR.Req;
                 }
             }
-
-            if (!result && reqORList.Count > 0)
-            {
-                foreach (baseRequirement<T> reqOR in reqORList)
-                {
-                    if (reqOR.checkAll(obj))
-                    { 
-                        return true;
-                    }
-                }
-            }
-
-            return result;
-        }
-
-        public baseRequirement<T> or(baseRequirement<T> reqOR)
-        {
-            this.reqORList.Add(reqOR);
-            return this;
-        }
-
-        public baseRequirement<T> and(baseRequirement<T> reqAND)
-        {
-            this.reqANDList.Add(reqAND);
-            return this;
+            
+            return null; 
         }
 
     }
 }
- */
+

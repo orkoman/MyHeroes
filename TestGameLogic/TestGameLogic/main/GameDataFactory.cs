@@ -15,7 +15,7 @@ namespace TestGameLogic.main
         // UNITS
         public static Warrior createWarrior()
         {
-            List<basePart> parts = new List<basePart> { new MainHand(), new OffHand() };
+            List<baseSlot> parts = new List<baseSlot> { new MainHand(), new OffHand() };
             int count = 50;
             int baseHp = 50;
             int baseSpeed = 5;
@@ -28,7 +28,7 @@ namespace TestGameLogic.main
 
         public static Archer createArcher()
         {
-            List<basePart> parts = new List<basePart> { new MainHand(), new OffHand() };
+            List<baseSlot> parts = new List<baseSlot> { new MainHand(), new OffHand() };
             int count = 50;
             int baseHp = 30;
             int baseSpeed = 5;
@@ -43,7 +43,7 @@ namespace TestGameLogic.main
         {
             //TODO read from xml
             List<baseSkill> skills = new List<baseSkill> { new SwordSkill() };
-            baseUnitRequirement reqs = new MultiplePartsRequirement(typeof(Hand),1);
+            baseUnitRequirement reqs = new SlotsRequirement(typeof(Hand),1);
             
             return new Sword(skills,reqs,new Damage(5,10));
         }
@@ -52,7 +52,7 @@ namespace TestGameLogic.main
         {
             //TODO read from xml
             List<baseSkill> skills = new List<baseSkill> { new BowSkill() };
-            baseUnitRequirement reqs = new MultiplePartsRequirement(typeof(OffHand),1);
+            baseUnitRequirement reqs = new SlotsRequirement(typeof(OffHand),1);
 
             return new Shield(skills, reqs);
         }
@@ -61,8 +61,7 @@ namespace TestGameLogic.main
         {
             //TODO read from xml
             List<baseSkill> skills = new List<baseSkill> { new BowSkill() };
-            baseUnitRequirement reqs = new MultiplePartsRequirement(typeof(Hand), 2);
-            reqs.and(new MultiplePartsRequirement(typeof(OffHand), 1));
+            baseUnitRequirement reqs = new SlotsRequirement(typeof(Hand), 2);
 
             return new Bow(skills, reqs, new Damage(5, 10));
         }

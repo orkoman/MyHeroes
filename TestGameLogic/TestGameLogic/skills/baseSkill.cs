@@ -6,7 +6,7 @@ using TestGameLogic.units;
 
 namespace TestGameLogic.skills
 {
-    public abstract class baseSkill: ICloneable
+    public abstract class baseSkill
     {
         /*protected baseUnit owner = null;
         public void setOwner(baseUnit owner)
@@ -22,7 +22,6 @@ namespace TestGameLogic.skills
         }
 
         protected abstract void setInitialParams();
-        
-        public abstract object Clone();
+    
     }
 }

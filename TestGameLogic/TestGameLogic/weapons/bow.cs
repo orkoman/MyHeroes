@@ -16,9 +16,6 @@ namespace TestGameLogic.weapons
 
         }
 
-        public override object Clone()
-        {
-            return new Bow(skills, requirements, damage);
-        }
+        
     }
 }

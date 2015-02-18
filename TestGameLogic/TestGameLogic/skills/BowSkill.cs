@@ -18,9 +18,5 @@ namespace TestGameLogic.skills
             costs = -6;
         }
 
-        public override object Clone()
-        {
-            return new BowSkill();
-        }
     }
 }

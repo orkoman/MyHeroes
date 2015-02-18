@@ -7,8 +7,6 @@ namespace TestGameLogic.main
 {
     public class Damage
     {
-
-
         protected int minDamage = -1;
         protected int maxDamage = -1;
 
@@ -27,5 +25,7 @@ namespace TestGameLogic.main
             int result = Game.GameRandom.Next(maxDamage-minDamage) + minDamage;
             return result;
         }
+
+       
     }
 }

@@ -60,8 +60,8 @@
     <Compile Include="main\RequirementManager.cs" />
     <Compile Include="main\Requirements\baseRequirement.cs" />
     <Compile Include="main\Requirements\baseUnitRequirement.cs" />
-    <Compile Include="main\Requirements\MultiplePartsRequirement.cs" />
-    <Compile Include="main\Requirements\PartRequirement.cs" />
+    <Compile Include="main\Requirements\SlotsRequirement.cs" />
+    <Compile Include="main\Requirements\EmptyUnitRequirement.cs" />
     <Compile Include="main\Tests\Requirement\TestCharacteristicsRequirement.cs" />
     <Compile Include="main\Tests\Requirement\TestObject.cs" />
     <Compile Include="Program.cs" />
@@ -78,8 +78,10 @@
     <Compile Include="units\parts\MainHand.cs" />
     <Compile Include="units\parts\OffHand.cs" />
     <Compile Include="units\parts\Hand.cs" />
-    <Compile Include="units\parts\basePart.cs" />
+    <Compile Include="units\parts\baseSlot.cs" />
     <Compile Include="units\Warrior.cs" />
+    <Compile Include="weapons\Interface\IInSlot.cs" />
+    <Compile Include="weapons\ShadowThing.cs" />
     <Compile Include="weapons\ToDo\axe.cs" />
     <Compile Include="weapons\baseWeapon.cs" />
     <Compile Include="weapons\Bow.cs" />

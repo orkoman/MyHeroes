@@ -12,9 +12,6 @@ namespace TestGameLogic.skills
         { 
         }
 
-        public override object Clone()
-        {
-            return new NormalRangeAttack();
-        }
+        
     }
 }

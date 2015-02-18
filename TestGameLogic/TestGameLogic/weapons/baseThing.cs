@@ -7,10 +7,11 @@ using TestGameLogic.units.parts;
 using TestGameLogic.main;
 using TestGameLogic.main.Requirements;
 using TestGameLogic.units;
+using TestGameLogic.weapons.Interface;
 
 namespace TestGameLogic.weapons
 {
-    public abstract class baseThing : ICloneable
+    public abstract class baseThing : IInSlot
     {
         protected baseUnitRequirement requirements = null;
         protected List<baseSkill> skills = null;
@@ -26,9 +27,9 @@ namespace TestGameLogic.weapons
             this.requirements = requirements;
         }
 
-        public abstract object Clone();
-
-        //TODO
-        //public abstract bool setToUnit(baseUnit unit, basePart where);
+        public baseThing getThing()
+        {
+            return this;
+        }
     }
 }

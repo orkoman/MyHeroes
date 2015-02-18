@@ -5,41 +5,168 @@ using System.Text;
 using TestGameLogic.units;
 using TestGameLogic.weapons;
 using TestGameLogic.units.parts;
+using System.Windows.Forms;
 
 namespace TestGameLogic.main
 {
-    public class Game
+    public enum GameStates
+    { 
+        setUnit = 10,
+        waitSetUnit = 11, //TODO not need in test
+        doMoves_selectUnit = 12,
+        doMoves_targetField = 13,
+        waitDoMoves = 14, //TODO not need in test
+        calculate = 15,
+        //waitOtherPlayerCalculate = 5, //TODO not need in test
+        
+       
+        end = 1000
+    }
+
+    public static class Game
     {
         public static Random GameRandom = new Random(DateTime.Now.Millisecond);
 
-        public Player[] players = null;
+        private static List<Player> players = null;
+        private static Player currentPlayer = null;
 
-        public Game()
+        private static Battlefield battleField = null;
+
+        private static GameStates gameState = GameStates.setUnit;
+
+        /*public GameStates GameState
         {
+            get { return gameState; }
+        }*/
 
-            //Create units
-            Sword sword1 = GameDataFactory.createSword();
-            Shield shield1 = GameDataFactory.createShield();
+        private static void stateMachineLoop()
+        { 
+            switch(gameState)
+            {
+                case GameStates.setUnit:
+                    setUnits();
+                    break;
+                case GameStates.doMoves_selectUnit:
+                    //doMoves();
+                    break;
+            
+            }
+        }
+
+        public static void start(PictureBox pictureBox)
+        {
+            createAll(pictureBox);
+            stateMachineLoop();
+        }
+
+        private static void createAll(PictureBox pictureBox)
+        {
+            //Create Everything
+
+            //Create battlefield
+            battleField = new Battlefield(pictureBox, 15, 10);
+
+
+            //Create units for player1
             Warrior warrior1 = GameDataFactory.createWarrior();
-            //TODO
-            //warrior1.setWeapon(sword1, warrior1.getParts(typeof(Hand), 0));
-            //warrior1.setWeapon(shield1,warrior1.getParts(typeof(OffHand),1));
+            warrior1.setWeapon(GameDataFactory.createSword());
+            warrior1.setWeapon(GameDataFactory.createShield());
 
-            Bow bow1 = GameDataFactory.createBow();
             Archer archer1 = GameDataFactory.createArcher();
-            //TODO
-            //archer1.setWeapon(bow1, archer1.getParts(typeof(Hand), 2));
+            archer1.setWeapon(GameDataFactory.createBow());
 
-            //TODO OLEG
-            Warrior warrior2 = warrior1.Clone() as Warrior;
-            Archer archer2 = archer1.Clone() as Archer;
+            //for player2
+            Warrior warrior2 = GameDataFactory.createWarrior();
+            warrior2.setWeapon(GameDataFactory.createSword());
+            warrior2.setWeapon(GameDataFactory.createShield());
+
+            Archer archer2 = GameDataFactory.createArcher();
+            archer2.setWeapon(GameDataFactory.createBow());
 
             //Create players
             Player player1 = new Player(new List<baseUnit>{warrior1, archer1});
             Player player2 = new Player(new List<baseUnit> { warrior2, archer2 });
+            players = new List<Player> { player1, player2 };
+            selectPlayer(player1);
 
-            players = new Player[] { player1,player2 };
+            //set init positions for units  
+            //TODO 
+
+
         }
 
+        private static void setUnits()
+        {
+            battleField.setPlayers(players);
+            battleField.reDraw();
+
+            gameState = GameStates.doMoves_selectUnit;
+            stateMachineLoop();
+        }
+
+        public static void click(int x, int y)
+        {
+            switch (gameState)
+            {
+                case GameStates.doMoves_selectUnit:
+                    doMoves_selectUnit(battleField.calculatePosition(x,y));
+                    break;
+                case GameStates.doMoves_targetField:
+                    doMoves_targetField(battleField.calculatePosition(x, y));
+                    break;
+            }
+        }
+
+        private static void doMoves_selectUnit(int position)
+        {
+            foreach (baseUnit unit in currentPlayer.Units)
+            {
+                if (unit.Position == position)
+                {
+                    selectUnit(currentPlayer,unit);
+                    //selectedUnit = unit;
+                    gameState = GameStates.doMoves_targetField;
+                }
+            }
+        }
+
+        private static void selectUnit(Player player, baseUnit unit)
+        {
+            player.selectUnit(unit);
+
+            battleField.reDraw();
+        }
+
+        private static void selectPlayer(Player player)
+        {
+            currentPlayer = player;
+
+            //battleField.reDraw();
+        }
+
+        private static void doMoves_targetField(int position)
+        {
+            currentPlayer.SelectedUnit.Target = position;
+            currentPlayer.unselectUnit();
+
+            battleField.reDraw();
+
+            gameState = GameStates.doMoves_selectUnit;
+        }
+
+        public static void endTurn()
+        {
+            if (currentPlayer == players.Last())
+            {
+                gameState = GameStates.calculate;
+
+                currentPlayer = players.First();
+            }
+            else
+            {
+                int index = players.IndexOf(currentPlayer) + 1;
+                currentPlayer = players[index];
+            }
+        }
     }
 }

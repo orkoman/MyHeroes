@@ -10,15 +10,11 @@ namespace TestGameLogic.units
 {
     public class Archer : Warrior
     {
-        public Archer(List<basePart> parts, int count, int baseHp, int baseSpeed, int basePower, Damage baseDamage)
+        public Archer(List<baseSlot> parts, int count, int baseHp, int baseSpeed, int basePower, Damage baseDamage)
             : base(parts, count, baseHp, baseSpeed, basePower, baseDamage)
         {
         }
 
-        public override object Clone()
-        {
-            //TODO
-            return new Archer(parts, count, baseHp, baseSpeed, basePower, baseDamage);
-        }
+       
     }
 }

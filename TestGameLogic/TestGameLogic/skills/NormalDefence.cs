@@ -9,7 +9,7 @@ namespace TestGameLogic.skills
     public class NormalDefence : baseSkill
     {
         public NormalDefence()
-        { 
+        {
         }
 
         protected override void setInitialParams()
@@ -18,9 +18,5 @@ namespace TestGameLogic.skills
             costs = -4;
         }
 
-        public override object Clone()
-        {
-            return new NormalDefence();
-        }
     }
 }

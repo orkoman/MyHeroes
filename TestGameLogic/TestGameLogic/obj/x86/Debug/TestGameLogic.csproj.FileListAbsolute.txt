@@ -5,3 +5,4 @@ D:\Projects\MyHeroes\TestGameLogic\TestGameLogic\bin\Debug\TestGameLogic.pdb
 D:\Projects\MyHeroes\TestGameLogic\TestGameLogic\obj\x86\Debug\TestGameLogic.exe
 D:\Projects\MyHeroes\TestGameLogic\TestGameLogic\obj\x86\Debug\TestGameLogic.pdb
 D:\Projects\MyHeroes\TestGameLogic\TestGameLogic\obj\x86\Debug\TestGameLogic.Form1.resources
+D:\Projects\MyHeroes\TestGameLogic\TestGameLogic\obj\x86\Debug\TestGameLogic.csprojResolveAssemblyReference.cache
