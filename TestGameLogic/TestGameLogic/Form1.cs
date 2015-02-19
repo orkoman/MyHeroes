@@ -20,12 +20,68 @@ namespace TestGameLogic
             this.AutoSize = true;
 
 
-            Game.start(pictureBox1, pictureBox2);
+            Game.start(pictureBox1, pictureBox2,pictureBox3);
 
 
             pictureBox2.Left = pictureBox1.Left;
             pictureBox2.Top = pictureBox1.Top + pictureBox1.Height + 10;
+
+            pictureBox3.Top = pictureBox1.Top;
+            pictureBox3.Left = pictureBox1.Left + pictureBox1.Width + 10;
         }
+
+
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //Game.start(pictureBox1);
+        }
+
+        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            Game.battleFieldClick(e.X, e.Y);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Game.endTurn();
+        }
+
+        private void pictureBox2_MouseClick(object sender, MouseEventArgs e)
+        {
+            Game.actionBarClick(e.X, e.Y);
+        }
+
+        /*void testBaseRequirementClean(List<baseRequirement<TestObject>> list)
+        { 
+            foreach(baseRequirement<TestObject> element in list)
+            {
+                element.clean();
+            }
+        }*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -40,7 +96,7 @@ namespace TestGameLogic
 
             TestObject testObject = new TestObject();
 
-            baseRequirement<TestObject> xFalse = new TestCharacteristicsRequirement("xFalse",40, 0);
+            baseRequirement<TestObject> xFalse = new TestCharacteristicsRequirement("xFalse", 40, 0);
             baseRequirement<TestObject> xTrue = new TestCharacteristicsRequirement("xTrue", 50, 0);
             baseRequirement<TestObject> yFalse = new TestCharacteristicsRequirement("yFalse", 40, 0);
             baseRequirement<TestObject> yTrue = new TestCharacteristicsRequirement("yTrue", 50, 0);
@@ -80,7 +136,7 @@ namespace TestGameLogic
             result &= (req.checkAll(testObject) == true);
             req = (yFalse.and(yTrue)).or(zTrue);
             result &= (req.checkAll(testObject) == true);
-            
+
             //--
 
             xFalse = new TestCharacteristicsRequirement("xFalse", 40, 0);
@@ -219,33 +275,5 @@ namespace TestGameLogic
 
             return result;
         }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //Game.start(pictureBox1);
-        }
-
-        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
-        {
-            Game.battleFieldClick(e.X, e.Y);
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            Game.endTurn();
-        }
-
-        private void pictureBox2_MouseClick(object sender, MouseEventArgs e)
-        {
-            Game.actionBarClick(e.X, e.Y);
-        }
-
-        /*void testBaseRequirementClean(List<baseRequirement<TestObject>> list)
-        { 
-            foreach(baseRequirement<TestObject> element in list)
-            {
-                element.clean();
-            }
-        }*/
     }
 }

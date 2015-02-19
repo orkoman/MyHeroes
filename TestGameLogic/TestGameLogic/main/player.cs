@@ -30,6 +30,10 @@ namespace TestGameLogic
         public void selectUnit(baseUnit unit)
         {
             selectedUnit = unit;
+            if (selectedUnit.SelectedSkill == null)
+            {
+                selectedUnit.selectSkill(selectedUnit.getActiveSkills()[0]); //TODO must have at least one active skill otherwise null exception (not good)
+            }
         }
 
         public void unselectUnit()

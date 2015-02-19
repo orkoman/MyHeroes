@@ -82,10 +82,12 @@ namespace TestGameLogic.main.Grafic
                     int y = player.SelectedUnit.Position / widthInFields;
 
                     gr.DrawRectangle(penSelected, new Rectangle(x * FIELD_SIZE, y * FIELD_SIZE, FIELD_SIZE, FIELD_SIZE));
+
+                    showPossibleMoves(player.SelectedUnit);
                 }
+
+                
             }
-
-
         }
 
         public int calculatePosition(int _x, int _y)
@@ -95,6 +97,49 @@ namespace TestGameLogic.main.Grafic
 
             int position = y * widthInFields + x;
             return position;
+        }
+
+        public bool checkDistancePossibility(int unitPosition, int targetPosition, int unitSpeed)
+        {
+            int unitX = unitPosition % widthInFields;
+            int unitY = unitPosition / widthInFields;
+
+            int targetX = targetPosition % widthInFields;
+            int targetY = targetPosition / widthInFields;
+
+            int dx = unitX - targetX;
+            int dy = unitY - targetY;
+
+            double distance = Math.Sqrt(dx * dx + dy * dy);
+
+            //TODO collisions
+            if (distance < (double)unitSpeed)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private void showPossibleMoves(baseUnit unit)
+        {
+            if (unit.SelectedSkill != null)
+            {
+                if (unit.SelectedSkill.needMove())
+                {
+                    int x = unit.Position % widthInFields;
+                    int y = unit.Position / widthInFields;
+
+
+                    gr.DrawEllipse(penTarget, new Rectangle((x - unit.Speed) * FIELD_SIZE, 
+                                                            (y - unit.Speed) * FIELD_SIZE,
+                                                            unit.Speed * 2 * FIELD_SIZE, 
+                                                            unit.Speed * 2 * FIELD_SIZE));
+                }
+                else
+                {
+                    gr.DrawRectangle(penTarget, new Rectangle(2, 2, pictureBox.Width - 4, pictureBox.Height - 4));
+                }
+            }
         }
     }
 }

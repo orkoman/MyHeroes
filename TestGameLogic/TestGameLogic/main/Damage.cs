@@ -10,6 +10,16 @@ namespace TestGameLogic.main
         protected int minDamage = -1;
         protected int maxDamage = -1;
 
+        public int MinDamage
+        {
+            get { return minDamage;  }
+        }
+
+        public int MaxDamage
+        {
+            get { return maxDamage; }
+        }
+
         public Damage(int minDamage, int maxDamage)
         {
             if (minDamage > maxDamage)

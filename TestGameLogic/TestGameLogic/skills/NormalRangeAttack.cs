@@ -6,12 +6,12 @@ using TestGameLogic.units;
 
 namespace TestGameLogic.skills
 {
-    public class NormalRangeAttack : NormalAttack
+    public class NormalRangeAttack : baseActiveRangeSkill
     {
         public NormalRangeAttack()
+            : base(-1) //TODO Oleg read from xml or database
         { 
         }
 
-        
     }
 }

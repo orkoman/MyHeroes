@@ -7,6 +7,7 @@ using TestGameLogic.weapons;
 using TestGameLogic.units.parts;
 using System.Windows.Forms;
 using TestGameLogic.main.Grafic;
+using TestGameLogic.skills;
 
 namespace TestGameLogic.main
 {
@@ -53,9 +54,9 @@ namespace TestGameLogic.main
             }
         }
 
-        public static void start(PictureBox battleFieldGrafic, PictureBox actionGrafic)
+        public static void start(PictureBox battleFieldGrafic, PictureBox actionGrafic, PictureBox propertyGrafic)
         {
-            graficMain = new GraficMain(battleFieldGrafic, actionGrafic);
+            graficMain = new GraficMain(battleFieldGrafic, actionGrafic, propertyGrafic);
             createEverything();
             stateMachineLoop();
         }
@@ -117,12 +118,12 @@ namespace TestGameLogic.main
             switch (gameState)
             {
                 case GameStates.doMoves_targetField:
-                    doMoves_targetField_action(graficMain.Actionbar.calculatePosition(x, y));
+                    doMoves_targetField_action(graficMain.Actionbar.calculateSkill(x, y));
                     break;
             }
         }
 
-        private static void doMoves_selectUnit(int position)
+        private static bool doMoves_selectUnit(int position)
         {
             foreach (baseUnit unit in currentPlayer.Units)
             {
@@ -131,14 +132,17 @@ namespace TestGameLogic.main
                     selectUnit(currentPlayer,unit);
                     //selectedUnit = unit;
                     gameState = GameStates.doMoves_targetField;
+                    return true;
                 }
             }
+            return false;
         }
 
         private static void selectUnit(Player player, baseUnit unit)
         {
             player.selectUnit(unit);
             graficMain.Actionbar.selectUnit(unit);
+            graficMain.Propertybar.selectUnit(unit);
 
             graficMain.reDraw();
         }
@@ -152,27 +156,40 @@ namespace TestGameLogic.main
 
         private static void doMoves_targetField(int position)
         {
-            currentPlayer.SelectedUnit.Target = position;
-            currentPlayer.unselectUnit();
+            if (!doMoves_selectUnit(position))
+            {
+                //TODO checklogic
+                if (checkLogic(position))
+                {
+                    currentPlayer.SelectedUnit.Target = position;
 
-            graficMain.reDraw();
-
-            gameState = GameStates.doMoves_selectUnit;
+                    //currentPlayer.unselectUnit();
+                    //gameState = GameStates.doMoves_selectUnit;
+                    graficMain.reDraw();
+                }
+            }
         }
 
-        private static void doMoves_targetField_action(int position)
+        private static void doMoves_targetField_action(baseActiveSkill skill)
         {
-            //TODO OLEG
-            //currentPlayer.SelectedUnit.selectSkill();
-            
-            
-            //TODO OLEG
-            /*currentPlayer.SelectedUnit.Target = position;
-            currentPlayer.unselectUnit();
+            if (skill != null)
+            {
+                currentPlayer.SelectedUnit.selectSkill(skill);
 
-            graficMain.reDraw();
+                //TODO OLEG
+                //currentPlayer.SelectedUnit.selectSkill();
 
-            gameState = GameStates.doMoves_selectUnit;*/
+
+                //TODO OLEG
+                /*currentPlayer.SelectedUnit.Target = position;
+                currentPlayer.unselectUnit();
+
+                graficMain.reDraw();
+
+                gameState = GameStates.doMoves_selectUnit;*/
+
+                graficMain.reDraw();
+            }
         }
 
         public static void endTurn()
@@ -185,9 +202,24 @@ namespace TestGameLogic.main
             }
             else
             {
+                gameState = GameStates.doMoves_selectUnit;
+
                 int index = players.IndexOf(currentPlayer) + 1;
                 currentPlayer = players[index];
             }
+        }
+
+        private static bool checkLogic(int position)
+        {
+            bool logicResult = true;
+
+            if (currentPlayer.SelectedUnit.SelectedSkill.needMove())
+            {
+                //TODO maybe logic not here????
+                logicResult &= graficMain.BattleField.checkDistancePossibility(currentPlayer.SelectedUnit.Position, position, currentPlayer.SelectedUnit.Speed);
+            }
+
+            return logicResult;
         }
     }
 }

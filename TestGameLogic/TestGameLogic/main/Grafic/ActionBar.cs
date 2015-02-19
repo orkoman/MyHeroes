@@ -43,9 +43,23 @@ namespace TestGameLogic.main.Grafic
 
                     gr.DrawString(activeSkill.GetType().Name.ToString(), Button.DefaultFont, Brushes.Black,
                                                         MARGIN_SIZE * 2 + index * (ACTION_SIZE + MARGIN_SIZE) + ACTION_SIZE / 10,
-                                                        5 + ACTION_SIZE / 4);
+                                                        5 + ACTION_SIZE / 8);
+
+                    gr.DrawString(activeSkill.Costs.Name.ToString(), Button.DefaultFont, Brushes.Black,
+                                                        MARGIN_SIZE * 2 + index * (ACTION_SIZE + MARGIN_SIZE) + ACTION_SIZE / 10,
+                                                        5 + ACTION_SIZE *5/ 8);
+                    gr.DrawString(activeSkill.Costs.ValueAsString, Button.DefaultFont, Brushes.Black,
+                                                        MARGIN_SIZE * 2 + index * (ACTION_SIZE + MARGIN_SIZE) + ACTION_SIZE / 10 + ACTION_SIZE*5/8,
+                                                        5 + ACTION_SIZE *5/ 8);
+
+                    if (activeSkill == selectedUnit.SelectedSkill)
+                    {
+                        gr.DrawRectangle(penSelected, new Rectangle(MARGIN_SIZE * 2 + index * (ACTION_SIZE + MARGIN_SIZE), MARGIN_SIZE, ACTION_SIZE, ACTION_SIZE));
+                    }
+                    
                     index++;
                 }
+
             }
         }
 
@@ -54,16 +68,23 @@ namespace TestGameLogic.main.Grafic
             this.selectedUnit = selectedUnit;
         }
 
-        public int calculatePosition(int x, int y)
+        public baseActiveSkill calculateSkill(int x, int y)
         {
             if (y >= MARGIN_SIZE && 
                 y < ACTION_SIZE + MARGIN_SIZE)
             {
                 int position = (x - MARGIN_SIZE * 2) / (ACTION_SIZE + MARGIN_SIZE);
-                return position;
+                if (selectedUnit != null && position >= 0)
+                {
+                    List<baseActiveSkill> skills = selectedUnit.getActiveSkills();
+                    if (skills.Count > position)
+                    {
+                        return skills[position];
+                    }
+                }
             }
 
-            return -1;
+            return null;
         }
     }
 }

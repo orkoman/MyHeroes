@@ -6,12 +6,12 @@ using TestGameLogic.units;
 
 namespace TestGameLogic.skills
 {
-    public class BowSkill : baseActiveSkill
+    public class BowSkill : baseActiveRangeSkill
     {
         public BowSkill()
+            : base(-6) //TODO Oleg read from xml or database
         {
-            //TODO Oleg read from xml or database
-            costs = -6;
+            
         }
 
     }

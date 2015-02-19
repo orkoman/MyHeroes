@@ -13,7 +13,7 @@ namespace TestGameLogic.weapons
         public Bow(List<baseSkill> skills, baseUnitRequirement requirements, Damage damage)
             : base(skills, requirements, damage)
         {
-
+            this.skills.Insert(0,new NormalRangeAttack()); //TODO OLEG maybe add this also through xml
         }
 
         

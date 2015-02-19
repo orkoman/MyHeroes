@@ -12,6 +12,7 @@ namespace TestGameLogic.main.Grafic
     {
         private Battlefield battleField = null;
         private ActionBar actionBar = null;
+        private PropertyBar propertyBar = null;
 
         public Battlefield BattleField
         {
@@ -23,17 +24,24 @@ namespace TestGameLogic.main.Grafic
             get { return actionBar; }
         }
 
-        public GraficMain(PictureBox battleFieldGrafic, PictureBox actionGrafic)
+        public PropertyBar Propertybar
+        {
+            get { return propertyBar; }
+        }
+
+        public GraficMain(PictureBox battleFieldGrafic, PictureBox actionGrafic, PictureBox propertyGrafic)
         {
             //Create battlefield
             battleField = new Battlefield(battleFieldGrafic, 15, 10);
             actionBar = new ActionBar(actionGrafic, 10);
+            propertyBar = new PropertyBar(propertyGrafic, 200, 500);
         }
 
         public void reDraw()
         {
             battleField.reDraw();
             actionBar.reDraw();
+            propertyBar.reDraw();
         }
     }
 }

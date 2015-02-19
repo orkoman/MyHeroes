@@ -5,6 +5,7 @@ using System.Text;
 using TestGameLogic.weapons;
 using TestGameLogic.main;
 using TestGameLogic.units.parts;
+using TestGameLogic.skills;
 
 namespace TestGameLogic.units
 {
@@ -13,6 +14,7 @@ namespace TestGameLogic.units
         public Archer(List<baseSlot> parts, int count, int baseHp, int baseSpeed, int basePower, Damage baseDamage)
             : base(parts, count, baseHp, baseSpeed, basePower, baseDamage)
         {
+            
         }
 
        

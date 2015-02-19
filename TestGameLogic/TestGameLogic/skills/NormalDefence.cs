@@ -6,14 +6,11 @@ using TestGameLogic.units;
 
 namespace TestGameLogic.skills
 {
-    public class NormalDefence : baseActiveSkill
+    public class NormalDefence : baseActiveMoveSkill
     {
         public NormalDefence()
+            : base(+4) //TODO Oleg read from xml or database
         {
-            //TODO Oleg read from xml or database
-            costs = -4;
         }
-
-        
     }
 }
