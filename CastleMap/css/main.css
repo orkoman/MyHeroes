@@ -1,0 +1,99 @@
+body
+{
+	background-color	: white;
+	margin				: 0px;
+}
+
+div
+{
+	position			: absolute;
+	margin				: 0px;
+}
+
+div#map/*,div#ground,div#buildings*/
+{
+	left			: 50px;
+	top				: 226px;
+	/*width			: 600px;
+	height			: 600px;*/
+	background-color : blue;
+}
+
+div#resourceTab
+{
+	left			: 10px;
+	top				: 10px;
+	width			: 600px;
+	height			: 40px;
+	background-color : yellowgreen;
+    z-index          : 100000;
+}
+
+div#actionTab
+{
+    left			: 10px;
+    top				: 50px;
+    /*width			: 600px;
+    height			: 40px;*/
+    background-color : gray;
+    z-index          : 100000;
+}
+
+div.field
+{
+	width			 : 64px;
+	height			 : 32px;
+	background-image : url("../img/grass.png");
+}
+
+div.castle
+{
+	width			 : 256px;
+	height			 : 256px;
+	background-image : url("../img/buildings/castle.png");
+}
+
+div.house
+{
+	width			 : 128px;
+	height			 : 128px;
+	background-image : url("../img/buildings/house.png");
+}
+
+div.wood
+{
+     width			 : 192px;
+     height			 : 192px;
+     background-image : url("../img/nature/wood.png");
+}
+
+div.build
+{
+    width			 : 32px;
+    height			 : 32px;
+    background-image : url("../img/actions/build.png");
+}
+
+div.man
+{
+    width			 : 32px;
+    height			 : 32px;
+    background-image : url("../img/units/people_u.png");
+}
+
+div.resourceIcon
+{
+    left			 : 0px;
+    top			 	 : 3px;
+    width			 : 32px;
+    height			 : 32px;
+}
+
+div.resourceText
+{
+    left			 : 32px;
+    top			 	 : 3px;
+    width			 : 64px;
+    height			 : 32px;
+}
+

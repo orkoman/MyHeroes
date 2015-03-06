@@ -1,0 +1,34 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Z002Y7UA
+ * Date: 27.02.2015
+ * Time: 12:37
+ */
+
+session_start();
+
+include_once '../../mainIncludes.php';
+
+include_once MAINDIR . "/classes/clLogin.php";
+
+if (clLogin::register($_POST["email"],$_POST["pw"],$_POST["pwConfirm"]))
+{
+    if ($_SESSION["lastError"] !== '')
+    {
+        $_SESSION["lastError"] = "Bad case must be checked ".$_SESSION["lastError"];
+
+        header("Location:".MAINURI."/loginForm.php");
+
+    }
+    else
+    {
+        header("Location:".MAINURI."/main.php");
+    }
+}
+else
+{
+    header("Location:".MAINURI."/loginForm.php");
+}
+
+?>
