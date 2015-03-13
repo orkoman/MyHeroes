@@ -7,14 +7,14 @@
  */
 
 session_start();
-include_once "mainIncludes.php";
+include_once "backend/mainIncludes.php";
 
 if (isset($_SESSION['id'])) {
 
-    include_once MAINDIR . "/classes/clInterface.php";
-    include_once MAINDIR . "/classes/clServer.php";
+    include_once MAINDIR . "/backend/classes/clInterface.php";
+    include_once MAINDIR . "/backend/classes/clServer.php";
 
-    clInterface::drawBegin(array('main.css'), array('utils.js','people.js','map.js','resources.js','game.js'));
+    clInterface::drawBegin(array('main.css'), array('ajaxHelper.js','utils.js','people.js','map.js','resources.js','actions.js','game.js'));
 
     clInterface::drawRessourceTab();
     clInterface::drawActionTab();
@@ -22,15 +22,17 @@ if (isset($_SESSION['id'])) {
 
     clInterface::drawEnd();
 
+    $size = substr(clServer::getCastleInfo() ,0,-1); //TODO not only size, but also maybe name
     $buildings = clServer::getBuildings();
     $nature = clServer::getNature();
     $resources = clServer::getResources();
 
-//TODO OLEG remove this
+    $mainUri = MAINURI;
 
+//TODO OLEG remove this
     print "
     <script type='text/javascript'>
-        var g_Game = new clGame('$buildings','$nature','$resources');
+        var g_Game = new clGame('$mainUri',$size,'$buildings','$nature','$resources');
     </script>
         ";
 }

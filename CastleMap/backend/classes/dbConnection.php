@@ -24,6 +24,19 @@ class dbConnection {
         return true;
     }
 
+    public static function query($_sql)
+    {
+        $requestResult = "";
+        if (self::connect())
+        {
+            $result = self::$connectionID->query($_sql);
+            //print_r($result);
+            return $result;
+        }
+
+        return "Error";
+    }
+
     public static function disconnect()
     {
         mysqli_close(self::$connectionID);

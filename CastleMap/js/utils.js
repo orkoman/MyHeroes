@@ -1,3 +1,14 @@
+/*function stringToDateTime(_str)
+{
+    var year = _str.substr(0,4);
+    var month = _str.substr(5,2);
+    var day = _str.substr(8,2);
+    var hour = _str.substr(11,2);
+    var minute = _str.substr(13,2);
+    var second = _str.substr(15,2);
+    return new Date(year,month,day,hour,minute,second);
+}*/
+
 function clPoint2(_x,_y)
 {
     this.m_x = _x;
@@ -6,29 +17,25 @@ function clPoint2(_x,_y)
 
 function position_toXY(_position,_size,_object_size_x,_object_size_y)
 {
-    var m = _position%_size;
-    var n = (_position - m)/_size;
+    var n = _position%_size;
+    var m = (_position - n)/_size;
 
-    return new clPoint2(n*32 + m*32 + _object_size_x, _size*16 + n*16 - m*16 - _object_size_y);
+    return new clPoint2(_size*32 + m*32 - n*32 + _object_size_x,
+                         n*16 + m*16 - _object_size_y);
 }
 
-function decodeData(_data, _objClass,_size)
+function decodeData(_data, _objClass,_extraArg)
 {
+    //alert(_data);
     var dataArr = _data.split('*');
-    var count = dataArr.length;
+    var count = dataArr.length - 1;
     var dataArrResult = new Array();
     for(var i = 0; i < count;i++) {
-        if (dataArr[i].length > 0) {
+        //alert(dataArr[i] + " " + dataArr[i].length );
+        //if (dataArr[i].length > 0) {
             var dataPropsArr = dataArr[i].split('_');
-            dataArrResult[i] = new _objClass(dataPropsArr,_size);
-            /*var count2 = dataPropsArr.length;
-            dataArrResult[i] = new Array();
-            for(var b = 0; b < count2;b++) {
-                if (dataPropsArr[b].length > 0) {
-                    dataArrResult[i][b] = dataPropsArr[b];
-                }
-            }*/
-        }
+            dataArrResult[i] = new _objClass(dataPropsArr,_extraArg);
+        //}
     }
     return dataArrResult;
 }
@@ -139,8 +146,14 @@ function oneRound(_path,_collisionsMap,_position2,_size)
     }
     if (newPath.length == 0)
     {
-        alert('no possible path ' + _path[0][0] + ' ' + _position2);
-        return 0;
+        if (_collisionsMap[_path[0][0]] != 0)
+        {
+            return -2; //die
+        }
+        else {
+            alert('no possible path ' + _path[0][0] + ' ' + _position2);
+            return 0;
+        }
     }
 
     return oneRound(newPath,_collisionsMap,_position2,_size);

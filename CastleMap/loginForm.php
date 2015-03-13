@@ -6,11 +6,9 @@
  * Time: 12:23
  */
 
-include_once "mainIncludes.php";
+include_once "backend/mainIncludes.php";
 
-include_once MAINDIR."/classes/clInterface.php";
-
-
+include_once MAINDIR . "/backend/classes/clInterface.php";
 
 if (!isset($_SESSION)) {
     session_start();
@@ -18,8 +16,15 @@ if (!isset($_SESSION)) {
 
 clInterface::drawBegin(array(),array());
 
-//print_r($_SESSION);
-$error = $_SESSION["lastError"];
+if (isset($_SESSION["lastError"]))
+{
+    $error = $_SESSION["lastError"];
+}
+else
+{
+    $error = '';
+}
+
 if ($error !== '')
 {
     print "<h1>ERROR: $error</h1>";
@@ -32,14 +37,14 @@ $_SESSION["lastError"] = "";
 
 print "
                 <h2>Login</h2>
-                <form action='backend/login/login.php' method='post'>
+                <form action='backend/login.php' method='post'>
                     E-mail: <input type='text' name='email' value='orkoman'/><br/>
                     PW: <input type='password' name='pw' value='123'/><br/>
                     <input type='submit' value='submit'/>
                 </form>
 
                 <h2>Register</h2>
-                <form action='backend/login/register.php' method='post'>
+                <form action='backend/register.php' method='post'>
                     E-mail: <input type='text' name='email'/><br/>
                     PW: <input type='password' name='pw'/><br/>
                     Confirm: <input type='password' name='pwConfirm'/><br/>

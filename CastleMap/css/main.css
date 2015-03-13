@@ -8,6 +8,7 @@ div
 {
 	position			: absolute;
 	margin				: 0px;
+    /*color: white;*/
 }
 
 div#map/*,div#ground,div#buildings*/
@@ -22,7 +23,7 @@ div#map/*,div#ground,div#buildings*/
 div#resourceTab
 {
 	left			: 10px;
-	top				: 10px;
+	top				: 60px;
 	width			: 600px;
 	height			: 40px;
 	background-color : yellowgreen;
@@ -60,6 +61,48 @@ div.house
 	background-image : url("../img/buildings/house.png");
 }
 
+div.store
+{
+    width			 : 192px;
+    height			 : 192px;
+    background-image : url("../img/buildings/store.png");
+}
+
+div.stonecutter
+{
+    width			 : 128px;
+    height			 : 128px;
+    background-image : url("../img/buildings/stonecutter.png");
+}
+
+div.woodcutter
+{
+    width			 : 128px;
+    height			 : 128px;
+    background-image : url("../img/buildings/woodcutter.png");
+}
+
+div.building4x4
+{
+    width			 : 256px;
+    height			 : 256px;
+    background-image : url("../img/buildings/build4x4.png");
+}
+
+div.building3x3
+{
+    width			 : 192px;
+    height			 : 192px;
+    background-image : url("../img/buildings/build3x3.png");
+}
+
+div.building2x2
+{
+    width			 : 128px;
+    height			 : 128px;
+    background-image : url("../img/buildings/build2x2.png");
+}
+
 div.wood
 {
      width			 : 192px;
@@ -67,11 +110,32 @@ div.wood
      background-image : url("../img/nature/wood.png");
 }
 
+div.stone
+{
+    width			 : 192px;
+    height			 : 192px;
+    background-image : url("../img/nature/stone.png");
+}
+
 div.build
 {
     width			 : 32px;
     height			 : 32px;
     background-image : url("../img/actions/build.png");
+}
+
+div.cancel
+{
+    width			 : 32px;
+    height			 : 32px;
+    background-image : url("../img/actions/cancel.png");
+}
+
+div.setpeople
+{
+    width			 : 32px;
+    height			 : 32px;
+    background-image : url("../img/actions/setpeople.png");
 }
 
 div.man
@@ -97,3 +161,11 @@ div.resourceText
     height			 : 32px;
 }
 
+div.dateTime
+{
+    bottom			 : 0px;
+    width            : 150px;
+    height           : 20px;
+    background-color : yellow;
+    column-rule      : black;
+}

@@ -8,9 +8,9 @@
 
 session_start();
 
-include_once '../../mainIncludes.php';
+include_once 'mainIncludes.php';
 
-include_once MAINDIR . "/classes/clLogin.php";
+include_once "classes/clLogin.php";
 
 if (clLogin::register($_POST["email"],$_POST["pw"],$_POST["pwConfirm"]))
 {
@@ -28,7 +28,10 @@ if (clLogin::register($_POST["email"],$_POST["pw"],$_POST["pwConfirm"]))
 }
 else
 {
-    header("Location:".MAINURI."/loginForm.php");
+    $_SESSION["lastError"] = $_SESSION["lastError"]."Coudn't register";
+
+    print_r($_SESSION["lastError"]);
+    //header("Location:".MAINURI."/loginForm.php");
 }
 
 ?>

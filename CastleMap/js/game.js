@@ -1,15 +1,27 @@
-function clGame(_buildings,nature,resources) {
+function clGame(mainUri,_size,_buildings,nature,resources) {
+
+    this.m_size = _size;
+    this.m_cashedBuildings = 0;
 
     this.f_init = init;
     this.f_mainLoop = mainLoop;
+//TODO preload images
+    clGame.sf_getGraph = function (_localPath) {
+        return "url('img/" + _localPath + "')";
+    }
 
     this.f_init();
 
     function init()
     {
+        this.m_ajaxHelper = new clAjaxHelper(mainUri);
+        //this.m_ajaxHelper.f_sendRequest(this.f_listener,"test1");
+        //this.m_ajaxHelper.f_sendRequest(this.f_listener,"test2");
+
+
         this.m_objlist = new Array();
 
-        this.m_map = new clMap('map',20,_buildings,nature);
+        this.m_map = new clMap('map',this.m_size,_buildings,nature);
         this.m_objlist[0] = this.m_map;
 
         this.m_resourceTab = new clResourceTab('resourceTab',resources);
@@ -41,30 +53,39 @@ function map_click(event)
     var x = event.pageX - g_Game.m_map.m_mapDiv.offsetLeft;
     var y = event.pageY - g_Game.m_map.m_mapDiv.offsetTop;
 
-    var isoX = Math.floor((x / 32 - y / 16) /2) + g_Game.m_map.m_size/2;
-    var isoY = Math.floor((y / 16 + x / 32) /2) - g_Game.m_map.m_size/2;
+    var isoY = Math.floor((x / 32 + y / 16) /2) - g_Game.m_map.m_size/2;
+    var isoX = Math.floor((y / 16 - x / 32) /2) + g_Game.m_map.m_size/2;
 
     var position = isoY*g_Game.m_map.m_size + isoX;
 
-    if (g_Game.m_map.m_colisionMap[position] != 0)
+    //alert(position);
+    var dragObject = g_Game.m_actionTab.m_dragObject;
+    if (dragObject != 0)
     {
-        //alert(g_Map.m_colisionMap[position]);
-        var element = document.getElementById(g_Game.m_map.m_colisionMap[position]);
-        element.style.backgroundImage = "url('../img/grass_hover.png')";
-
-        //TODO show buildings actions and properties
+        //alert(position + ' ' + dragObject.m_size);
+        position -= (dragObject.m_size - 1);
+        if (g_Game.m_map.f_addBuilding(dragObject.m_buildingId,position,dragObject.m_size)) {
+            g_Game.m_actionTab.f_removeDragObject();
+            g_Game.m_map.f_showBuildingsAndNature(true);
+        }
     }
-    else
-    {
-        // get grass
-        //var element = document.getElementById('f_' + position);
-        //element.style.backgroundImage = "url('../img/grass_hover.png')";
+    else {
+        var p2Point = new clPoint2(event.pageX, event.pageY);
 
-        var p2Point = new clPoint2(event.pageX,event.pageY);
-        var tempAction = new clActionBuild(position, 32);
-        g_Game.m_actionTab.f_show(new Array(tempAction,tempAction),p2Point);
+        if (g_Game.m_map.m_colisionMap[position] != 0) {
+            //alert(g_Map.m_colisionMap[position]);
+            //var element = document.getElementById(g_Game.m_map.m_colisionMap[position]);
+            //element.style.backgroundImage = clGame.sf_getGraph("grass_hover.png");
+            //TODO get from server
+            g_Game.m_actionTab.f_show(new Array(new clActionSetPeople(),new clActionCancel()), p2Point);
+        }
+        else {
+            // get grass
+            //var element = document.getElementById('f_' + position);
+            //element.style.backgroundImage = "url('" + clGame.imgLocalPath + "/grass_hover.png')";
 
-
+            g_Game.m_actionTab.f_show(new Array(new clActionBuild(), new clActionCancel()), p2Point);
+        }
     }
     //alert(position);
 }
@@ -76,34 +97,13 @@ function map_move(event)
     if (dragObject != 0)
     {
         var actionTabDiv = g_Game.m_actionTab.m_actionDiv;
-        actionTabDiv.style.left = (event.pageX - dragObject.offsetHeight/8) + "px";
-        actionTabDiv.style.top = (event.pageY - dragObject.offsetHeight*11/16) + "px";
+        actionTabDiv.style.left = (event.pageX) + "px";
+        actionTabDiv.style.top = (event.pageY - dragObject.m_dragDiv.offsetHeight*3/4) + "px";
     }
 }
 
-function clActionBuild(_position,_size)
-{
-    this.m_name = "build";
-    this.m_size = _size;
-    this.m_action = "clActionBuild.sf_action(" + _position +")";
-    clActionBuild.sf_action = function action(_position)
-    {
-        var buildCastle = new clChooseBuilding('castle',_position,256);
-        var buildHouse = new clChooseBuilding('house',_position,128);
-        g_Game.m_actionTab.f_show(new Array(buildCastle,buildHouse),-1); //-1 means same position
-    }
-}
 
-function clChooseBuilding(_name, _position, _size)
-{
-    this.m_name = _name;
-    this.m_size = _size;
-    this.m_action = "clChooseBuilding.sf_action('" + _name + "'," + _position +")";
-    clChooseBuilding.sf_action = function action(_name,_position)
-    {
-        g_Game.m_actionTab.f_close();
-        g_Game.m_actionTab.f_createDragObject(_name);
-    }
-}
+
+
 
 

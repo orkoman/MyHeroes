@@ -7,7 +7,7 @@
  */
 
 include_once "dbConnection.php";
-include_once "gameFactory.php";
+include_once "clGameFactory.php";
 
 class clLogin {
 
@@ -54,7 +54,7 @@ class clLogin {
                         $result = false;
                     }
                     else {
-                        $result = gameFactory::createCastle();
+                        $result = clGameFactory::createCastle();
                     }
                 } else {
                     $_SESSION["lastError"] = "Error in database while insert user";

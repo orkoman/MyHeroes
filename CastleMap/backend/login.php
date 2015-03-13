@@ -8,9 +8,9 @@
 
 session_start();
 
-include_once '../../mainIncludes.php';
+include_once 'mainIncludes.php';
 
-include_once MAINDIR . "/classes/clLogin.php";
+include_once "classes/clLogin.php";
 
 if (clLogin::login($_POST["email"],$_POST["pw"]))
 {

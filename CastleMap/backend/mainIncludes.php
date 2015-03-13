@@ -5,8 +5,8 @@
  * Date: 27.02.2015
  * Time: 12:19
  */
-define ('MAINDIR', "D:/Projects/CastleMap");
-define ('MAINURI', "http://localhost");
+define ('MAINDIR', "D:/Projects/castlemap");
+define ('MAINURI', "http://localhost/castlemap");
 
 
 
